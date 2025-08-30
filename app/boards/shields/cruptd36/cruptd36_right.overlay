@@ -1,0 +1,50 @@
+#include "cruptd36.dtsi"
+
+&kscan0 {
+    col-gpios
+        = <&gpio0 5 GPIO_ACTIVE_HIGH>
+        , <&gpio0 6 GPIO_ACTIVE_HIGH>
+        , <&gpio0 7 GPIO_ACTIVE_HIGH>
+        , <&gpio0 8 GPIO_ACTIVE_HIGH>
+        , <&gpio0 9 GPIO_ACTIVE_HIGH>
+        , <&gpio0 10 GPIO_ACTIVE_HIGH>
+        ;
+};
+
+&uart0 {
+    status = "okay";
+    current-speed = <115200>;
+    tx-pin = <0>;
+    rx-pin = <1>;
+};
+
+// SPI configuration for PMW3360
+&pinctrl {
+    spi0_default: spi0_default {
+        group1 {
+            psels = <RPI_PICO_SPI0_SCK_P18>, <RPI_PICO_SPI0_TX_P19>, <RPI_PICO_SPI0_RX_P16>;
+        };
+    };
+};
+
+&spi0 {
+    status = "okay";
+    cs-gpios = <&gpio0 13 GPIO_ACTIVE_LOW>;
+    
+    trackball: trackball@0 {
+        compatible = "pixart,pmw3360";
+        status = "okay";
+        reg = <0>;
+        spi-max-frequency = <2000000>;
+        irq-gpios = <&gpio0 17 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+        cpi = <800>;
+        // rotate-90; // Uncomment if needed for your orientation
+    };
+};
+
+/ {
+    trackball_listener {
+        compatible = "zmk,input-listener";
+        device = <&trackball>;
+    };
+};
