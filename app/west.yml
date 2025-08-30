@@ -4,6 +4,8 @@ manifest:
       url-base: https://github.com/zephyrproject-rtos
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
+    - name: george-norton
+      url-base: https://github.com/george-norton
   projects:
     - name: zephyr
       remote: zmkfirmware
@@ -37,5 +39,9 @@ manifest:
       revision: 6cb4c283e76209d59c45fbcb218800cd19e9339d
       path: modules/msgs/zmk-studio-messages
       remote: zmkfirmware
+    - name: zmk-driver-pmw3360
+      remote: george-norton
+      revision: main
+      path: modules/drivers/zmk-driver-pmw3360
   self:
     west-commands: scripts/west-commands.yml
