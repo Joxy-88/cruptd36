@@ -1,0 +1,23 @@
+if SHIELD_CRUPTD36_LEFT
+
+config ZMK_KEYBOARD_NAME
+    default "cruptd36"
+
+config ZMK_SPLIT_ROLE_CENTRAL
+    default y
+
+endif
+
+if SHIELD_CRUPTD36_RIGHT
+
+config ZMK_KEYBOARD_NAME
+    default "cruptd36"
+
+endif
+
+if SHIELD_CRUPTD36_LEFT || SHIELD_CRUPTD36_RIGHT
+
+config ZMK_SPLIT
+    default y
+
+endif
